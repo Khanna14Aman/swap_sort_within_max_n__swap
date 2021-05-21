@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n,i,j;
+    cin>>n;
+    int a[n];
+    for(i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+    priority_queue<pair<int,int>>pq;
+    int temp,x,count=0;
+    for(i=0;i<n;i++)
+    {
+        x=i;              // consider ith element is minimum so find minimum element of array and then at last swap them after j loop then it will gurantee that swap will not exceed n-1
+        for(j=i;j<n;j++)
+        {
+            if(a[x]>a[j])
+            {
+                x=j;
+            }
+        }
+        if(i!=x)
+        {
+            int y = -1*i;
+            pq.push({y,x});
+            count++;
+        }
+        swap(a[i],a[x]);
+        
+    }
+    cout<<count<<"\n";
+    for(i=1;i<=count;i++)
+    {
+        cout<<(-1)*pq.top().first<<" "<<pq.top().second<<"\n";
+        pq.pop();
+    }
+    return 0;
+}
